@@ -20,7 +20,7 @@ Input images and fusion result:
 | ![EO Image](demo/demo_EO.jpg) | ![IR Image](demo/demo_IR.jpg) |
 
 <div align="center">
-  <img src="demo/output.jpg" alt="Fusion Result" width="50%">
+  <img src="demo/output.jpg" alt="Fusion Result" width="100%">
   <br>
   <em>Fusion Result</em>
 </div>
