@@ -11,6 +11,20 @@
 
 VisualFusion LibTorch is a computer vision system for **EO-IR (Electro-Optical/Infrared) image alignment and fusion**. It uses deep learning models to detect feature points and compute homography matrices for accurate image registration, then creates fused outputs with advanced edge-preserving algorithms.
 
+### 🎨 Demo
+
+Input images and fusion result:
+
+| EO (Electro-Optical) | IR (Infrared) |
+|:---:|:---:|
+| ![EO Image](demo/demo_EO.jpg) | ![IR Image](demo/demo_IR.jpg) |
+
+<div align="center">
+  <img src="demo/output.jpg" alt="Fusion Result" width="50%">
+  <br>
+  <em>Fusion Result</em>
+</div>
+
 ### ✨ Key Features
 
 - 🎯 **Deep Learning Feature Detection**: Uses SemLA model for keypoint detection and matching
