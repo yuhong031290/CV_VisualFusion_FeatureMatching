@@ -27,11 +27,11 @@ Input images and fusion result:
 
 ### ✨ Key Features
 
+- ⚙️ **Video & Image Cropping**: Support for VideoCut and PictureCut parameters
 - 🎯 **Deep Learning Feature Detection**: Uses SemLA model for keypoint detection and matching
 - 🖼️ **EO-IR Image Fusion**: Seamless fusion with shadow enhancement and edge preservation  
 - 📐 **RANSAC Homography**: Robust estimation with outlier filtering
 - 🎛️ **Homography Smoothing**: Temporal consistency with configurable smoothing parameters
-- ⚙️ **Video & Image Cropping**: Support for VideoCut and PictureCut parameters
 - 📊 **Performance Timing**: Built-in timer analysis for each processing stage
 
 ## 🏗️ Architecture
