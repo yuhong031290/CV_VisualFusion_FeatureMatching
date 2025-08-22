@@ -50,7 +50,7 @@ VisualFusion_libtorch/
 |--------|--------------|--------|-------------|
 | **LibTorch** | `.zip` (TorchScript) | CPU/CUDA | Dynamic shapes, flexible deployment |
 | **ONNX Runtime** | `.onnx` | CPU | Optimized CPU inference, cross-platform |
-| **TensorRT** | `.trt` | CUDA | Maximum GPU performance, FP16 support |
+| **TensorRT** | `.trt` | CPU | Optimized CPU inference, FP16 support |
 
 ## 📋 Requirements
 
@@ -303,7 +303,7 @@ input/
 ### Typical Performance (320×240 resolution)
 - **LibTorch**: 15-30 FPS (CUDA), 5-10 FPS (CPU), ~200-500MB model
 - **ONNX Runtime**: 8-15 FPS (CPU optimized), ~150-300MB model
-- **TensorRT**: 30-60+ FPS (GPU), FP16 available, ~100-200MB engine
+- **TensorRT**: 30-60+ FPS (CPU), FP16 available, ~100-200MB engine
 
 ### Timing Components
 All versions provide detailed timing for: resize, grayscale conversion, model inference, homography computation, edge detection, perspective transform, and fusion operations.
@@ -330,7 +330,6 @@ python -c "import onnxruntime; onnxruntime.InferenceSession('model.onnx')"
 
 # TensorRT: Regenerate engine and test loading
 python export_onnx2tensorRT.py --onnx model.onnx --trt model.trt
-trtexec --loadEngine=model.trt --batch=1
 ```
 
 ### Parameter Tuning
