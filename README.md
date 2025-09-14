@@ -49,16 +49,16 @@ VisualFusion_libtorch/
 | Engine | Model Format | Device | Key Features |
 |--------|--------------|--------|-------------|
 | **LibTorch** | `.zip` (TorchScript) | CPU/CUDA | Dynamic shapes, flexible deployment |
-| **ONNX Runtime** | `.onnx` | CPU | Optimized CPU inference, cross-platform |
-| **TensorRT** | `.trt` | CPU | Optimized CPU inference, FP16 support |
+| **ONNX Runtime** | `.onnx` | CPU/CUDA | Optimized CUDA inference, cross-platform |
+| **TensorRT** | `.engine` | CUDA | Optimized CUDA inference, FP16 support |
 
 ## 📋 Requirements
 
 - **OS**: Ubuntu 20.04+
 - **C++ Compiler**: GCC 9+, CMake 3.18+
 - **OpenCV**: 4.5+ (core, imgcodecs, highgui, calib3d, videoio)
-- **LibTorch**: 2.0+ (LibTorch version only)
-- **ONNX Runtime**: 1.15+ (ONNX version only)
+- **LibTorch**: 11.7 (LibTorch version only)
+- **ONNX Runtime**: 1.16.8 (ONNX version only)
 - **CUDA & TensorRT**: 11.4+ & 8.6.1.6+ (TensorRT version only)
 
 ## 🛠️ Installation & Usage
@@ -68,11 +68,8 @@ VisualFusion_libtorch/
 ```bash
 cd IR_Convert_v21_libtorch
 
-# Build the project
-bash gcc.sh
-
-# Run with configuration
-./build/out config/config.json
+# Build and run
+bash gcc.sh && ./build/out
 ```
 
 ### ONNX Runtime Version  
@@ -80,11 +77,9 @@ bash gcc.sh
 ```bash
 cd Onnx
 
-# Build the project
-bash gcc.sh
+# Build and run
+bash gcc.sh && ./build/out
 
-# Run with configuration  
-./build/out config/config.json
 ```
 
 ### TensorRT Version
@@ -92,11 +87,8 @@ bash gcc.sh
 ```bash
 cd tensorRT
 
-# Build the project (requires CUDA and TensorRT)
-bash gcc.sh
-
-# Run with configuration
-./out config/config.json
+# Build and run
+bash gcc.sh && ./build/out
 ```
 
 #### TensorRT Model Conversion
@@ -104,10 +96,7 @@ bash gcc.sh
 ```bash
 # Convert ONNX model to TensorRT engine
 cd convert_to_libtorch
-python export_onnx2tensorRT.py \
-    --onnx /path/to/model.onnx \
-    --trt /path/to/output.trt \
-    --workspace-size 1024
+python export_onnx2tensorRT.py --fp16 --opset 12
 ```
 
 ## ⚙️ Configuration
@@ -277,7 +266,7 @@ input/
 **RANSAC Homography Estimation**  
 - **Algorithm**: Random Sample Consensus with 8.0px threshold
 - **Minimum Points**: 4 correspondences required
-- **Confidence**: 0.98 success probability with 800 max iterations
+- **Confidence**: 0.99 success probability with 1000 max iterations
 - **Quality Validation**: Determinant bounds and inlier ratio checks
 
 **Temporal Homography Smoothing**
@@ -301,10 +290,9 @@ input/
 ## 📊 Performance
 
 ### Typical Performance (320×240 resolution)
-- **LibTorch**: 15-30 FPS (CUDA), 5-10 FPS (CPU), ~200-500MB model
-- **ONNX Runtime**: 8-15 FPS (CPU optimized), ~150-300MB model
-- **TensorRT**: 30-60+ FPS (CPU), FP16 available, ~100-200MB engine
-
+- **LibTorch**: 124ms (CPU), 13ms (CUDA) 
+- **ONNX Runtime**: 215ms (CPU), 11ms (CUDA)
+- **TensorRT**: 5.6ms (CPU), 3.2ms (CUDA)
 ### Timing Components
 All versions provide detailed timing for: resize, grayscale conversion, model inference, homography computation, edge detection, perspective transform, and fusion operations.
 
