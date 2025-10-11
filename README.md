@@ -1,4 +1,4 @@
-# VisualFusion LibTorch
+# VisualFusion
 
 🔥 **Real-Time EO-IR Image Alignment and Fusion System**
 
