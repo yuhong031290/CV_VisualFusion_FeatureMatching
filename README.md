@@ -176,6 +176,16 @@ The project supports multiple inference backends. Convert the pretrained model t
 
 ### LibTorch (TorchScript)
 
+#### FP32 Model
+```bash
+cd convert_to_libtorch
+python export_to_jit_fp32.py
+```
+- **Input**: `reg.ckpt`
+- **Output**: `../IR_Convert_v21_libtorch/model/SemLA_fp32.zip`
+- **Format**: FP32 TorchScript
+- **Use case**: CPU inference or maximum precision
+
 #### FP16 Model (Recommended for GPU)
 ```bash
 cd convert_to_libtorch
@@ -186,16 +196,6 @@ python export_to_jit_fp16.py
 - **Format**: FP16 TorchScript
 - **Use case**: GPU inference with Tensor Core acceleration
 - **Pipeline**: PyTorch FP16 → LibTorch FP16 (direct export)
-
-#### FP32 Model
-```bash
-cd convert_to_libtorch
-python export_to_jit_fp32.py
-```
-- **Input**: `reg.ckpt`
-- **Output**: `../IR_Convert_v21_libtorch/model/SemLA_fp32.zip`
-- **Format**: FP32 TorchScript
-- **Use case**: CPU inference or maximum precision
 
 ### ONNX Runtime
 
