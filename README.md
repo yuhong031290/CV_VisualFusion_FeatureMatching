@@ -34,8 +34,8 @@ Input images and fusion result:
 ## 🏗️ Project Structure
 
 ```
-VisualFusion_libtorch/
-├── IR_Convert_v21_libtorch/    # LibTorch C++ implementation (Main)
+VisualFusion/
+├── IR_Convert_v21_libtorch/    # LibTorch C++ implementation for PC (x86)
 │   ├── main.cpp                 # Main processing pipeline
 │   ├── config/                  # Configuration files
 │   │   └── config.json          # Runtime configuration
@@ -54,25 +54,38 @@ VisualFusion_libtorch/
 │   ├── build/                   # Build artifacts
 │   └── gcc.sh                   # Build script
 │
+├── IR_Convert_v21_libtorch_nx/ # LibTorch C++ implementation for Jetson Orin NX (ARM64)
+│   ├── main.cpp                 # Main processing pipeline for NX
+│   └── ...                      # (Structure similar to x86 version)
+│
 ├── Onnx/                        # ONNX Runtime implementation
 │   ├── main.cpp                 # ONNX Runtime pipeline
 │   ├── lib_image_fusion/        # Core libraries (similar structure)
 │   └── model/                   # ONNX models
 │
-├── tensorRT/                    # TensorRT implementation
+├── tensorRT/                    # TensorRT implementation for PC (x86)
 │   ├── main.cpp                 # TensorRT pipeline
 │   ├── lib_image_fusion/        # Core libraries
 │   └── model/                   # TensorRT engines
 │
-└── convert_to_libtorch/         # Model conversion utilities
-    ├── export_to_jit_fp16.py    # PyTorch → LibTorch FP16
-    ├── export_to_jit_fp32.py    # PyTorch → LibTorch FP32
-    ├── export_to_onnx_fp16.py   # PyTorch → ONNX FP16
-    ├── export_to_onnx_fp32.py   # PyTorch → ONNX FP32
-    ├── export_to_tensorrt_fp16.py  # PyTorch → TensorRT FP16
-    ├── export_to_tensorrt_fp32.py  # PyTorch → TensorRT FP32
-    ├── model_jit/               # SemLA model implementation
-    └── reg.ckpt                 # Pretrained weights
+├── tensorRT_nx/                 # TensorRT implementation for Jetson Orin NX (ARM64)
+│   ├── main.cpp                 # TensorRT pipeline for NX
+│   └── ...                      # (Structure similar to x86 version)
+│
+├── Convert_model/               # Model conversion utilities
+│   ├── export_to_jit_fp16.py    # PyTorch → LibTorch FP16
+│   ├── export_to_jit_fp32.py    # PyTorch → LibTorch FP32
+│   ├── export_to_onnx_fp16.py   # PyTorch → ONNX FP16
+│   ├── export_to_onnx_fp32.py   # PyTorch → ONNX FP32
+│   ├── export_to_tensorrt_fp16.py  # PyTorch → TensorRT FP16
+│   ├── export_to_tensorrt_fp32.py  # PyTorch → TensorRT FP32
+│   ├── model_jit/               # SemLA model implementation
+│   └── reg.ckpt                 # Pretrained weights
+│
+└── demo/                        # Demo images and results
+    ├── demo_EO.jpg              # Sample EO input
+    ├── demo_IR.jpg              # Sample IR input
+    └── output.jpg               # Sample fusion output
 ```
 
 ## 🔧 Supported Inference Engines
@@ -85,11 +98,17 @@ VisualFusion_libtorch/
 
 ## 📋 Requirements
 
-### System Dependencies
+### System Dependencies (PC / x86)
 - **OS**: Ubuntu 20.04+ (tested on Ubuntu 20.04.6 LTS)
-- **CPU**: Multi-core processor
+- **CPU**: Multi-core processor (x86 architecture)
 - **Memory**: 4GB RAM minimum, 8GB+ recommended
-- **GPU**: NVIDIA GPU with CUDA 11.x support (optional, for GPU acceleration)
+- **GPU**: NVIDIA GPU with CUDA 11.x support
+
+### System Dependencies (Jetson Orin NX)
+- **OS**: NVIDIA JetPack
+- **CPU**: ARM64 architecture
+- **Memory**: 8GB+ shared memory
+- **GPU**: Jetson Orin NX integrated GPU
 
 ### Software Dependencies
 
@@ -98,62 +117,73 @@ VisualFusion_libtorch/
 - **CMake**: 3.18+
 - **OpenCV**: 4.5+
 
-#### Python Environment
-- **Python**: 3.8+
-- **PyTorch**: 1.13.1
-- **ONNX**: 1.14+
-- **onnxruntime**: 1.18.0
-- **numpy**, **opencv-python**
-
-#### GPU Libraries (Optional)
-- **CUDA**: 11.x
+#### Inference Engines & Libraries (PC / x86)
+- **LibTorch**: 1.10+ (C++ API)
+- **ONNX Runtime**: 1.10+
+- **TensorRT**: 8.x
+- **CUDA Toolkit**: 11.x
 - **cuDNN**: 8.x
-- **TensorRT**: 8.4.x (for TensorRT backend)
 
-## 🛠️ Installation
+#### Inference Engines & Libraries (Jetson Orin NX)
+- **Python**: 3.10.12
+- **PyTorch**: 2.5.0
+- **TensorRT**: 10.3
+- **CUDA Toolkit**: 12.6
+- **cuDNN**: 9.3
 
-### 1. Clone Repository
+## 🛠️ Build and Run
 
+### 1. Build
+
+#### LibTorch Version (PC)
 ```bash
-git clone <repository-url>
-cd VisualFusion_libtorch
-```
-
-### 2. Install Python Dependencies
-
-```bash
-cd convert_to_libtorch
-pip install torch==1.13.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu116
-pip install onnx onnxruntime-gpu==1.18.0 opencv-python numpy
-```
-
-### 3. Build LibTorch Version
-
-```bash
-cd IR_Convert_v21_libtorch
+cd IR_Convert_v21_libtorch/
 bash gcc.sh
 ```
 
-The build script will:
-- Download and setup LibTorch 1.13.1 (if not present)
-- Compile C++ source files
-- Generate executable: `./build/out`
+#### LibTorch Version (Jetson Orin NX)
+```bash
+cd IR_Convert_v21_libtorch_nx/
+bash gcc.sh
+```
 
-### 4. Build ONNX Version (Optional)
-
+#### ONNX Version
 ```bash
 cd Onnx
 bash gcc.sh
 ```
 
-### 5. Build TensorRT Version (Optional)
-
+#### TensorRT Version (PC)
 ```bash
 cd tensorRT
 bash gcc.sh
 ```
 
-**Note**: TensorRT version requires TensorRT 8.4.x libraries installed and in `LD_LIBRARY_PATH`.
+#### TensorRT Version (Jetson Orin NX)
+```bash
+cd tensorRT_nx
+bash gcc.sh
+```
+
+### 2. Run
+
+#### LibTorch Version
+```bash
+cd IR_Convert_v21_libtorch
+./build/out 
+```
+
+#### ONNX Runtime Version
+```bash
+cd Onnx
+./build/out 
+```
+
+#### TensorRT Version
+```bash
+cd tensorRT
+./build/out 
+```
 
 ## 📦 Model Conversion
 
@@ -163,7 +193,7 @@ The project supports multiple inference backends. Convert the pretrained model t
 
 #### FP32 Model
 ```bash
-cd convert_to_libtorch
+cd Convert_model
 python export_to_jit_fp32.py
 ```
 - **Input**: `reg.ckpt`
@@ -173,7 +203,7 @@ python export_to_jit_fp32.py
 
 #### FP16 Model (Recommended for GPU)
 ```bash
-cd convert_to_libtorch
+cd Convert_model
 python export_to_jit_fp16.py
 ```
 - **Input**: `reg.ckpt` (PyTorch checkpoint)
@@ -186,14 +216,14 @@ python export_to_jit_fp16.py
 
 #### FP32 Model
 ```bash
-cd convert_to_libtorch
+cd Convert_model
 python export_to_onnx_fp32.py
 ```
 - **Output**: `../Onnx/model/SemLA_onnx_opset12_fp32.onnx`
 
 #### FP16 Model
 ```bash
-cd convert_to_libtorch
+cd Convert_model
 python export_to_onnx_fp16.py
 ```
 - **Output**: `../Onnx/model/onnx_op12_fp16.onnx`
@@ -202,7 +232,7 @@ python export_to_onnx_fp16.py
 
 #### FP32 Engine
 ```bash
-cd convert_to_libtorch
+cd Convert_model
 python export_to_tensorrt_fp32.py
 ```
 - **Pipeline**: PyTorch FP32 → ONNX FP32 → TensorRT FP32
@@ -210,7 +240,7 @@ python export_to_tensorrt_fp32.py
 
 #### FP16 Engine
 ```bash
-cd convert_to_libtorch
+cd Convert_model
 python export_to_tensorrt_fp16.py
 ```
 - **Pipeline**: PyTorch FP32 → ONNX FP32 → TensorRT FP16 (using `trtexec --fp16`)
@@ -386,8 +416,6 @@ cd Onnx
 cd tensorRT
 ./build/out 
 ```
-
-**Note**: Ensure TensorRT engine (`.engine`) is pre-built before running. See [Model Conversion](#-model-conversion) section.
 
 ## 🔍 Processing Pipeline
 
