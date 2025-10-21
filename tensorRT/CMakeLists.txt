@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 project(out)
 
+# Set C++17 standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 set(OpenCV_DIR "/usr/include/opencv4")
 
 # Add ONNX Runtime support
-set(ONNXRUNTIME_ROOT_PATH "/name/onnxruntime-linux-x64-1.20.1")
+set(ONNXRUNTIME_ROOT_PATH "/<path>/onnxruntime-linux-x64-1.16.3")
 set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda")
 
 list(APPEND CMAKE_LIBRARY_PATH "${CUDA_TOOLKIT_ROOT_DIR}/lib64")
@@ -19,11 +22,11 @@ find_package(CUDA REQUIRED)
 find_package(OpenCV REQUIRED COMPONENTS core imgcodecs highgui calib3d videoio dnn)
 
 # TensorRT (手動指定路徑)
-set(TENSORRT_INCLUDE_DIR /opt/TensorRT-8.6.1.6/include)
-set(TENSORRT_LIB /opt/TensorRT-8.6.1.6/lib/libnvinfer.so)
+set(TENSORRT_INCLUDE_DIR /opt/TensorRT-8.4.3.1/include)
+set(TENSORRT_LIB /opt/TensorRT-8.4.3.1/lib/libnvinfer.so)
 include_directories(${TENSORRT_INCLUDE_DIR})
 include_directories(/usr/local/cuda/include)
-link_directories(/opt/TensorRT-8.6.1.6/lib)
+link_directories(/opt/TensorRT-8.4.3.1/lib)
 link_directories(/usr/local/cuda/lib64)
 
 link_directories(${OpenCV_LIBS} /usr/local/lib)
@@ -52,6 +55,8 @@ target_link_libraries(out
     nvparsers
     nvonnxparser
     cudart
+    cublas
     ${CUDA_LIBRARIES}
+    stdc++fs
 )
 

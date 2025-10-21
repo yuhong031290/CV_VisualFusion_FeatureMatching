@@ -1,0 +1,3 @@
+/<path>/forgithub/VisualFusion_libtorch/IR_Convert_v21_libtorch/build/CMakeFiles/out.dir
+/<path>/forgithub/VisualFusion_libtorch/IR_Convert_v21_libtorch/build/CMakeFiles/edit_cache.dir
+/<path>/forgithub/VisualFusion_libtorch/IR_Convert_v21_libtorch/build/CMakeFiles/rebuild_cache.dir

@@ -1,11 +1,11 @@
 {
-    "input_dir": "/name/videodata/only",
-    "output_dir": "/name/forgithub/VisualFusion_libtorch/Onnx/output",
-    "output": true,
+    "input_dir": "/<path>/videodata/Version3",
+    "output_dir": "../output",
+    "output": false,
 
-    "device": "cpu",
-    "pred_mode": "fp32",
-    "model_path": "/name/forgithub/VisualFusion_libtorch/Onnx/model/onnxModel/SemLA_onnx_320x240_fixed1200pts.onnx",
+    "device": "cuda",
+    "pred_mode": "fp16",
+    "model_path": "../model/onnx_op12_fp16.onnx",
 
     "VideoCut":true,
     "Vcut_x": 870,
@@ -20,7 +20,6 @@
     "Pcut_h":1080,
 
 
-
     "output_width": 320,
     "output_height": 240,
 
@@ -33,7 +32,6 @@
     "fusion_threshold_equalization_low": 72,
     "fusion_threshold_equalization_high": 192,
     "fusion_threshold_equalization_zero": 64,
-    "fusion_interpolation":"cubic",
 
     "perspective_check": true,
     "perspective_distance": 10,

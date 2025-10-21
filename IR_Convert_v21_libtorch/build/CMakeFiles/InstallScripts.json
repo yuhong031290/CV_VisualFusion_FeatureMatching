@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/<path>/forgithub/VisualFusion_libtorch/IR_Convert_v21_libtorch/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

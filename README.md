@@ -2,21 +2,6 @@
 
 🔥 **Real-Time EO-IR Image Alignment and Fusion System with Deep Learning**
 
-## 📋 Version Information
-
-```
-pytorch=1.13.1
-libtorch=1.13.1
-cudnn=8
-onnxruntime=1.18.0
-tensorrt=8.4
-cuda=11
-```
-
-[![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://isocpp.org/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-green.svg)](https://opencv.org/)
-[![LibTorch](https://img.shields.io/badge/LibTorch-1.13.1-orange.svg)](https://pytorch.org/)
-[![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)](https://python.org/)
 
 ## 🚀 Overview
 
@@ -663,6 +648,22 @@ struct Config {
     // ... (see config.json for full list)
 };
 ```
+
+## 📋 Version Information
+
+```
+pytorch=1.13.1
+libtorch=1.13.1
+cudnn=8
+onnxruntime=1.18.0
+tensorrt=8.4
+cuda=11
+```
+
+[![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://isocpp.org/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-green.svg)](https://opencv.org/)
+[![LibTorch](https://img.shields.io/badge/LibTorch-1.13.1-orange.svg)](https://pytorch.org/)
+[![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)](https://python.org/)
 
 ## 🤝 Contributing
 

@@ -1,0 +1,3 @@
+/<path>/forgithub/VisualFusion_libtorch/tensorRT_nx/build/CMakeFiles/out.dir
+/<path>/forgithub/VisualFusion_libtorch/tensorRT_nx/build/CMakeFiles/edit_cache.dir
+/<path>/forgithub/VisualFusion_libtorch/tensorRT_nx/build/CMakeFiles/rebuild_cache.dir

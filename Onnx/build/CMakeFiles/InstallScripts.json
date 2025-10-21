@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/<path>/forgithub/VisualFusion_libtorch/Onnx/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
